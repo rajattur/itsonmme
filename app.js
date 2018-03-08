@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 
 const appRoutes = require('./routes/app');
 const exampleRoute = require('./routes/example');
+const awsLambdaRoutes = require('./routes/lambda');
 
 const app = express();
 
@@ -29,7 +30,8 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/example',exampleRoute)
+app.use('/example',exampleRoute);
+app.use('/lambda',awsLambdaRoutes);
 app.use('/', appRoutes);
 
 // catch 404 and forward to error handler
