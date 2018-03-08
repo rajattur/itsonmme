@@ -1,9 +1,9 @@
-var path = require('path');
+const path = require('path');
 
-var webpack = require('webpack');
-var webpackMerge = require('webpack-merge');
-var commonConfig = require('./webpack.config.common.js');
-var ngw = require('@ngtools/webpack');
+const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
+const commonConfig = require('./webpack.config.common.js');
+const ngw = require('@ngtools/webpack');
 
 module.exports = webpackMerge.smart(commonConfig, {
     entry: {
