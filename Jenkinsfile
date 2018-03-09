@@ -5,7 +5,7 @@ node {
         checkout scm
         sh "git rev-parse --short HEAD > .git/commit-id"
         commit_id = readFile('.git/commit-id').trim()
-        env COMMIT_ID=commit_id
+        env.COMMIT_ID=commit_id
     }
 
     stage('test') {
