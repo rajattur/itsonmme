@@ -29,7 +29,7 @@ node {
         echo "commit_id ${COMMIT_ID}"
         // sh "kubectl run itsonmme-${commit_id} --image=rajattur/itsonmme:${commit_id} --namespace=development"
         // sh "kubectl expose deployment itsonmme-${commit_id} --port=3000 --name=itsonmmesvc-${commit_id} --namespace=development --type=LoadBalancer"
-        sh "kubectl create -f k8s/deployment.yaml"
-        sh "kubectl create -f k8s/svc.yaml"
+        sh "kubectl create -f --env=COMMIT_ID=${COMMIT_ID} k8s/deployment.yaml"
+        sh "kubectl create -f --env=COMMIT_ID=${COMMIT_ID}  k8s/svc.yaml"
     }
 }
