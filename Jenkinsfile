@@ -29,6 +29,8 @@ node {
         echo "commit_id ${COMMIT_ID}"
         // sh "kubectl run itsonmme-${commit_id} --image=rajattur/itsonmme:${commit_id} --namespace=development"
         // sh "kubectl expose deployment itsonmme-${commit_id} --port=3000 --name=itsonmmesvc-${commit_id} --namespace=development --type=LoadBalancer"
+        sh "kubectl delete deployment --namespace=development --name=itsonmme"
+        sh "kubectl delete svc --namespace=development --name=itsonmme"
         sh "kubectl create -f k8s/deployment.yaml"
         sh "kubectl create -f k8s/svc.yaml"
     }
