@@ -29,8 +29,8 @@ node {
         echo "commit_id ${COMMIT_ID}"
         export SERVICE_NAME="itsonmme-${COMMIT_ID}"
         export IMAGE_NAME="rajattur/itsonmme:${COMMIT_ID}"
-        envsubt < k8s/deployment.yaml | kubectl apply -f -
-        envsubt < k8s/svc.yaml | kubectl apply -f -
+        envsubt < k8s/deployment.yaml | kubectl create -f - >
+        envsubt < k8s/svc.yaml | kubectl create -f - >
         // sh "kubectl run itsonmme-${commit_id} --image=rajattur/itsonmme:${commit_id} --namespace=development"
         // sh "kubectl expose deployment itsonmme-${commit_id} --port=3000 --name=itsonmmesvc-${commit_id} --namespace=development --type=LoadBalancer"
         // withEnv([
