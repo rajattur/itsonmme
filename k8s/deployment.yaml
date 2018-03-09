@@ -1,18 +1,18 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: "itsonmme-${COMMIT_ID}"
+  name: $SERVICE_NAME
   namespace: development
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: "itsonmme-${COMMIT_ID}"
+        app: $SERVICE_NAME
     spec:
       containers:
-      - name: "itsonmme-${COMMIT_ID}"
-        image: "rajattur/itsonmme:${COMMIT_ID}"
+      - name: $SERVICE_NAME
+        image: $IMAGE_NAME
         ports:
         - name: nodejs-port
           containerPort: 3000

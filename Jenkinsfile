@@ -27,8 +27,12 @@ node {
     stage('deploy-k8s') {
         // Later this will read form deployment.yml and service.yml file form project folder k8s.
         echo "commit_id ${COMMIT_ID}"
-        sh "kubectl run itsonmme-${commit_id} --image=rajattur/itsonmme:${commit_id} --namespace=development"
-        sh "kubectl expose deployment itsonmme-${commit_id} --port=3000 --name=itsonmmesvc-${commit_id} --namespace=development --type=LoadBalancer"
+        export SERVICE_NAME="itsonmme-${COMMIT_ID}"
+        export IMAGE_NAME="rajattur/itsonmme:${COMMIT_ID}"
+        envsubst < k8s/deployment.yaml | kubectl apply -f -
+        envsubst < k8s/svc.yaml | kubectl apply -f -
+        // sh "kubectl run itsonmme-${commit_id} --image=rajattur/itsonmme:${commit_id} --namespace=development"
+        // sh "kubectl expose deployment itsonmme-${commit_id} --port=3000 --name=itsonmmesvc-${commit_id} --namespace=development --type=LoadBalancer"
         // withEnv([
         //     "COMMIT_ID=${COMMIT_ID}"
         // ]) {
