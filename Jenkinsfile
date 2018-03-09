@@ -1,6 +1,6 @@
 node {
     def commit_id
-    env COMMIT_ID
+    env COMMIT_ID=''
     stage('Preparation') {
         checkout scm
         sh "git rev-parse --short HEAD > .git/commit-id"
