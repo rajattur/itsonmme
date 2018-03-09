@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: itsonmme-{{commit_id}}
+  namespace: development
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: itsonmme-{{commit_id}}
+    spec:
+      containers:
+      - name: itsonmme:{{commit_id}}
+        image: rajattur/itsonmme:{{commit_id}}
+        ports:
+        - name: nodejs-port
+          containerPort: 3000

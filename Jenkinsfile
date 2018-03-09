@@ -1,6 +1,6 @@
 node {
     def commit_id
-
+    env COMMIT_ID=commit_id
     stage('Preparation') {
         checkout scm
         sh "git rev-parse --short HEAD > .git/commit-id"
@@ -25,8 +25,10 @@ node {
 
     stage('deploy-k8s') {
         // Later this will read form deployment.yml and service.yml file form project folder k8s.
-        echo "commit_id ${commit_id}"
-        sh "kubectl run itsonmme-${commit_id} --image=rajattur/itsonmme:${commit_id} --namespace=development"
-        sh "kubectl expose deployment itsonmme-${commit_id} --port=3000 --name=itsonmmesvc-${commit_id} --namespace=development --type=LoadBalancer"
+        echo "commit_id ${COMMIT_ID}"
+        // sh "kubectl run itsonmme-${commit_id} --image=rajattur/itsonmme:${commit_id} --namespace=development"
+        // sh "kubectl expose deployment itsonmme-${commit_id} --port=3000 --name=itsonmmesvc-${commit_id} --namespace=development --type=LoadBalancer"
+        sh "kubectl create -f k8s/deployment.yaml"
+        sh "kubectl create -f k8s/svc.yaml"
     }
 }
