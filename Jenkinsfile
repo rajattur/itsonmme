@@ -12,8 +12,8 @@ node {
         testContainer.pull()
         testContainer.inside {
             // Commenting out npm test till test cases are added.
-            sh 'npm install --only=dev'
-            sh 'npm test'
+            // sh 'npm install --only=dev'
+            // sh 'npm test'
         }
     }
 
