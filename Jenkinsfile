@@ -42,6 +42,6 @@ node {
         // sh "kubectl delete deployment --namespace=development itsonmme"
         // sh "kubectl delete services --namespace=development itsonmme"
         sh "kubectl create -f k8s/deployment.yaml"
-        // sh "kubectl create -f k8s/svc.yaml"
+        sh "kubectl create -f k8s/svc.yaml"
     }
 }
