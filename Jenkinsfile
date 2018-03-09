@@ -1,11 +1,11 @@
 node {
     def commit_id
-    env COMMIT_ID=''
+    
     stage('Preparation') {
         checkout scm
         sh "git rev-parse --short HEAD > .git/commit-id"
         commit_id = readFile('.git/commit-id').trim()
-        COMMIT_ID=commit_id
+        env COMMIT_ID=commit_id
     }
 
     stage('test') {
