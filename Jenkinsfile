@@ -22,7 +22,7 @@ node {
         }
     }
 
-    stage('Env test') {
+    stage('K8s file build') {
         echo "Running env test..."
         sh "sed -i.bak s/-\\\${SERVICE_NAME}/-${commit_id}/g ./k8s/deployment.yaml"
         sh "sed -i.bak s/:\\\${IMAGE_NAME}/:${commit_id}/g ./k8s/deployment.yaml"
