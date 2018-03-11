@@ -20,7 +20,7 @@ node {
 
     stage('Env test') {
         echo "Running env test"
-        envsubst '${SERVICE_NAME}' <k8s/deployment.yaml >deployment2.yaml
+        envsubst <k8s/deployment.yaml >deployment2.yaml
         cat deployment2.yaml
     }
 
