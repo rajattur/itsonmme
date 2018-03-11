@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
       - name: itsonmme-${SERVICE_NAME}
-        image: rajattur/itsonmme-${IMAGE_NAME}
+        image: rajattur/itsonmme:${IMAGE_NAME}
         ports:
         - name: nodejs-port
           containerPort: 3000
