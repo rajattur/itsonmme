@@ -23,7 +23,7 @@ node {
         // envsubst < "k8s/deployment.yaml" > "k8s/deployment2.yaml"
         // cat deployment2.yaml
 
-        export SERVICE_NAME='somevalue' IMAGE_NAME='someothervalue'
+        export SERVICE_NAME="somevalue" IMAGE_NAME="someothervalue"
         MYVARS='$SERVICE_NAME:$IMAGE_NAME'
 
         envsubst "$MYVARS" "<k8s/deployment.yaml >destination.txt"
