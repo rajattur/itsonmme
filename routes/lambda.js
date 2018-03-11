@@ -9,6 +9,7 @@ router.get('/users', function (req, res, next) {
             return res.send(error)
         }
         if (response.statusCode === 200) {
+            console.log(body)
             res.send(body)
         }
         else {
