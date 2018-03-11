@@ -1,8 +1,8 @@
-
+#!/usr/bin/env groovy
 def kubeSubst(placeholder, value, file) {
     sh "sed -i.bak s/:\\\${$placeholder}/:$value/g $file.yaml"
 }
-node {
+node("docker"){
     def commit_id
 
     stage('Preparation') {
@@ -33,8 +33,13 @@ node {
         // envsubst "<k8s/deployment.yaml >destination.txt"
         // cat destination.txt
         // kubeSubst('SERVICE_NAME', '88c2058f564', 'k8s/deployment')
-        sh "sed -i.bak s/-\\\${SERVICE_NAME}/-${commit_id}/g deployment.yaml"
-        cat deployment.yaml
+        // sh "sed -i.bak s/-\\\${SERVICE_NAME}/-${commit_id}/g deployment.yaml"
+        withEnv({
+            "SERVICE_NAME=itsonmme-${commit_id}"
+        }) {
+            sh "deploy.sh"
+        }
+        // cat deployment.yaml
     }
 
     stage('cat deployment.yaml') {
