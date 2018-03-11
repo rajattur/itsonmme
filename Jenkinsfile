@@ -24,6 +24,8 @@ node {
 
     stage('Env test') {
         echo "Running env test..."
+        sh "sed -i.bak s/-\\\${SERVICE_NAME}/-${commit_id}/g ./k8s/deployment.yaml"
+        sh "sed -i.bak s/-\\\${IMAGE_NAME}/-${commit_id}/g ./k8s/deployment.yaml"
         // envsubst < k8s/deployment.yaml >k8s/deployment2.yaml
         // cat deployment2.yaml
 
@@ -40,6 +42,7 @@ node {
         //     sh "deploy.sh"
         // }
         // cat deployment.yaml
+        sh "cat ./k8s/deployment.yaml"
     }
 
     // stage('cat deployment.yaml') {
