@@ -1,6 +1,8 @@
 node {
     def commit_id
-    
+    def kubeSubst(placeholder, value, file) {
+        sh "sed -i.bak s/:\\\${$placeholder}/:$value/g $file.yml"
+    }
     stage('Preparation') {
         checkout scm
         sh "git rev-parse --short HEAD > .git/commit-id"
@@ -26,8 +28,10 @@ node {
         // export SERVICE_NAME="somevalue" IMAGE_NAME="someothervalue"
         // MYVARS='$SERVICE_NAME:$IMAGE_NAME'
 
-        envsubst "<k8s/deployment.yaml >destination.txt"
-        cat destination.txt
+        // envsubst "<k8s/deployment.yaml >destination.txt"
+        // cat destination.txt
+        kubeSubst('SERVICE_NAME', '88c2058f564', '/k8s/deployment')
+        cat k8s/deployment.yaml
     }
 
     stage('docker build/push') {
