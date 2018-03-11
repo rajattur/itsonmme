@@ -24,7 +24,7 @@ node {
 
     stage('Env test') {
         echo "Running env test..."
-        envsubst < k8s/deployment.yaml >k8s/deployment2.yaml
+        // envsubst < k8s/deployment.yaml >k8s/deployment2.yaml
         // cat deployment2.yaml
 
         // export SERVICE_NAME="somevalue" IMAGE_NAME="someothervalue"
@@ -32,7 +32,12 @@ node {
 
         // envsubst "<k8s/deployment.yaml >destination.txt"
         // cat destination.txt
-        kubeSubst('SERVICE_NAME', '88c2058f564', 'k8s/deployment')
+        // kubeSubst('SERVICE_NAME', '88c2058f564', 'k8s/deployment')
+        sh "sed -i.bak s/-\\\${SERVICE_NAME}/-${commit_id}/g k8s/deployment.yaml"
+        cat k8s/deployment.yaml
+    }
+
+    stage('cat deployment.yaml') {
         cat k8s/deployment.yaml
     }
 
