@@ -32,7 +32,7 @@ node {
 
         // envsubst "<k8s/deployment.yaml >destination.txt"
         // cat destination.txt
-        kubeSubst('SERVICE_NAME', '88c2058f564', '/k8s/deployment')
+        kubeSubst('SERVICE_NAME', '88c2058f564', 'k8s/deployment')
         cat k8s/deployment.yaml
     }
 
