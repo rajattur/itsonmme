@@ -34,17 +34,17 @@ node("docker"){
         // cat destination.txt
         // kubeSubst('SERVICE_NAME', '88c2058f564', 'k8s/deployment')
         // sh "sed -i.bak s/-\\\${SERVICE_NAME}/-${commit_id}/g deployment.yaml"
-        withEnv({
-            "SERVICE_NAME=itsonmme-${commit_id}"
-        }) {
-            sh "deploy.sh"
-        }
+        // withEnv({
+        //     "SERVICE_NAME=itsonmme-${commit_id}"
+        // }) {
+        //     sh "deploy.sh"
+        // }
         // cat deployment.yaml
     }
 
-    stage('cat deployment.yaml') {
-        cat deployment.yaml
-    }
+    // stage('cat deployment.yaml') {
+    //     cat deployment.yaml
+    // }
 
     stage('docker build/push') {
         docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
