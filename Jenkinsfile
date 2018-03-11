@@ -2,7 +2,7 @@
 def kubeSubst(placeholder, value, file) {
     sh "sed -i.bak s/:\\\${$placeholder}/:$value/g $file.yaml"
 }
-node("docker"){
+node {
     def commit_id
 
     stage('Preparation') {
