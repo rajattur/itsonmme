@@ -33,12 +33,12 @@ node {
         // envsubst "<k8s/deployment.yaml >destination.txt"
         // cat destination.txt
         // kubeSubst('SERVICE_NAME', '88c2058f564', 'k8s/deployment')
-        sh "sed -i.bak s/-\\\${SERVICE_NAME}/-${commit_id}/g k8s/deployment.yaml"
-        cat k8s/deployment.yaml
+        sh "sed -i.bak s/-\\\${SERVICE_NAME}/-${commit_id}/g deployment.yaml"
+        cat deployment.yaml
     }
 
     stage('cat deployment.yaml') {
-        cat k8s/deployment.yaml
+        cat deployment.yaml
     }
 
     stage('docker build/push') {

@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: itsonmme-${SERVICE_NAME}
+  namespace: development
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: itsonmme-${SERVICE_NAME}
+    spec:
+      containers:
+      - name: itsonmme-${SERVICE_NAME}
+        image: $IMAGE_NAME
+        ports:
+        - name: nodejs-port
+          containerPort: 3000
