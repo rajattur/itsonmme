@@ -1,6 +1,6 @@
 
 def kubeSubst(placeholder, value, file) {
-    sh "sed -i.bak s/:\\\${$placeholder}/:$value/g $file.yml"
+    sh "sed -i.bak s/:\\\${$placeholder}/:$value/g $file.yaml"
 }
 node {
     def commit_id
