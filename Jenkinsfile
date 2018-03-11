@@ -1,8 +1,6 @@
 node {
     def commit_id
-    def kubeSubst(placeholder, value, file) {
-        sh "sed -i.bak s/:\\\${$placeholder}/:$value/g $file.yml"
-    }
+
     stage('Preparation') {
         checkout scm
         sh "git rev-parse --short HEAD > .git/commit-id"
@@ -21,6 +19,9 @@ node {
     }
 
     stage('Env test') {
+        def kubeSubst(placeholder, value, file) {
+            sh "sed -i.bak s/:\\\${$placeholder}/:$value/g $file.yml"
+        }
         echo "Running env test"
         // envsubst < "k8s/deployment.yaml" > "k8s/deployment2.yaml"
         // cat deployment2.yaml
