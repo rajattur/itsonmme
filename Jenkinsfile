@@ -18,6 +18,12 @@ node {
         }
     }
 
+    stage('Env test') {
+        echo "Running env test"
+        envsubst '${SERVICE_NAME}' <k8s/deployment.yaml >deployment2.yaml
+        cat deployment2.yaml
+    }
+
     stage('docker build/push') {
         docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
             def app = docker.build("rajattur/itsonmme:${commit_id}", '.').push()
