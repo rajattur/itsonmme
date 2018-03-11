@@ -64,8 +64,8 @@ node {
         // env.IMAGE_NAME="rajattur/itsonmme:${COMMIT_ID}"
         // envsubst '${SERVICE_NAME} ${IMAGE_NAME}' <k8s/deployment.yaml
         // envsubst < k8s/svc.yaml | kubectl create -f - >
-        sh "kubectl run itsonmme-${commit_id} --image=rajattur/itsonmme:${commit_id} --namespace=development"
-        sh "kubectl expose deployment itsonmme-${commit_id} --port=3000 --name=itsonmmesvc-${commit_id} --namespace=development --type=LoadBalancer"
+        // sh "kubectl run itsonmme-${commit_id} --image=rajattur/itsonmme:${commit_id} --namespace=development"
+        // sh "kubectl expose deployment itsonmme-${commit_id} --port=3000 --name=itsonmmesvc-${commit_id} --namespace=development --type=LoadBalancer"
         // withEnv([
         //     "COMMIT_ID=${COMMIT_ID}"
         // ]) {
@@ -74,7 +74,7 @@ node {
         // }
         // sh "kubectl delete deployment --namespace=development itsonmme"
         // sh "kubectl delete services --namespace=development itsonmme"
-        // sh "kubectl create -f k8s/deployment.yaml"
-        // sh "kubectl create -f k8s/svc.yaml"
+        sh "kubectl create -f ./k8s/deployment.yaml"
+        sh "kubectl create -f ./k8s/svc.yaml"
     }
 }
