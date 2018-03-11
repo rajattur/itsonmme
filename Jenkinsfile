@@ -24,7 +24,7 @@ node {
 
     stage('Env test') {
         echo "Running env test..."
-        envsubst < "k8s/deployment.yaml" > "k8s/deployment2.yaml"
+        envsubst < k8s/deployment.yaml >k8s/deployment2.yaml
         // cat deployment2.yaml
 
         // export SERVICE_NAME="somevalue" IMAGE_NAME="someothervalue"
