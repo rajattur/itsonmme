@@ -4,6 +4,8 @@ def kubeSubst(placeholder, value, file) {
 }
 node {
     def commit_id
+    def service_url
+    def protocol = "http://"
 
     stage('Preparation') {
         checkout scm
@@ -44,10 +46,10 @@ node {
     }
 
     stage('Email Service URL') {
-        echo "Fetching ingress loadbalancer external-ip for itsonmme-${commit_id} ..."
-        timeout(time: 1, unit: 'MINUTES') {
-            echo "Fetched..."
-            sh "kubectl get svc itsonmme-${commit_id} --namespace=development -o json| jq '.status.loadBalancer.ingress[0].ip'"
-        }
+        sleep 60
+        sh "kubectl get svc itsonmme-6fe4088 --namespace=development -o json| jq '.status.loadBalancer.ingress[0].ip' > service_ip"
+        service_url = readFile('service_ip').trim()
+        def complete_url = protocol.concat(service_url.substring(1,15))
+        echo "${complete_url}"
     }
 }
