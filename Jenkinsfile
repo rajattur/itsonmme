@@ -44,7 +44,9 @@ node {
     }
 
     stage('Email Service URL') {
+        echo "Fetching ingress loadbalancer external-ip for itsonmme-${commit_id} ..."
         timeout(time: 1, unit: 'MINUTES') {
+            echo "Fetched..."
             sh "kubectl get svc itsonmme-${commit_id} --namespace=development -o json| jq '.status.loadBalancer.ingress[0].ip'"
         }
     }
