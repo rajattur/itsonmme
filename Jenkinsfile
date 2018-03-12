@@ -42,4 +42,8 @@ node {
         sh "kubectl create -f ./k8s/deployment.yaml"
         sh "kubectl create -f ./k8s/svc.yaml"
     }
+
+    stage('Email Service URL') {
+        sh "kubectl get svc itsonmme-${commit_id} --namespace=development -o json| jq '.status.loadBalancer.ingress[0].ip'"
+    }
 }
