@@ -10,7 +10,7 @@ router.get('/users', function (req, res, next) {
         }
         if (response.statusCode === 200) {
             console.log(body)
-            res.send(body)
+            res.json(body)
         }
         else {
             res.send({message: 'error from lambda function'})
