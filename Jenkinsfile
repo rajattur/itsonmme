@@ -47,7 +47,7 @@ node {
 
     stage('Email Service URL') {
         sleep 60
-        sh "kubectl get svc itsonmme-6fe4088 --namespace=development -o json| jq '.status.loadBalancer.ingress[0].ip' > service_ip"
+        sh "kubectl get svc itsonmme-${commit_id} --namespace=development -o json| jq '.status.loadBalancer.ingress[0].ip' > service_ip"
         service_url = readFile('service_ip').trim()
         def complete_url = protocol.concat(service_url.substring(1,15))
         echo "${complete_url}"
