@@ -44,6 +44,8 @@ node {
     }
 
     stage('Email Service URL') {
-        sh "kubectl get svc itsonmme-${commit_id} --namespace=development -o json| jq '.status.loadBalancer.ingress[0].ip'"
+        timeout(time: 1, unit: 'MINUTES') {
+            sh "kubectl get svc itsonmme-${commit_id} --namespace=development -o json| jq '.status.loadBalancer.ingress[0].ip'"
+        }
     }
 }
