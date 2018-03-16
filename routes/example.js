@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/', function (req, res, next) {
     res.send({
-        message: 'example-route'
+        message: 'example-route-demo'
     })
 });
 
